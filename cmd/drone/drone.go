@@ -32,7 +32,7 @@ var (
 	timeout = flag.Duration("timeout", 300*time.Minute, "")
 
 	// build will run in a privileged container
-	privileged = flag.Bool("privileged", false, "")
+	privileged = flag.Bool("privileged", true, "")
 
 	// runs Drone with verbose output if True
 	verbose = flag.Bool("v", false, "")

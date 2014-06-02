@@ -325,7 +325,7 @@ func (b *Builder) run() error {
 
 	// configure if Docker should run in privileged mode
 	host := docker.HostConfig{
-		Privileged: (b.Privileged && len(b.Repo.PR) == 0),
+		Privileged: true,
 	}
 
 	// debugging
@@ -465,6 +465,7 @@ func (b *Builder) writeDockerfile(dir string) error {
 		dockerfile.WriteEnv("TERM", "xterm")
 		dockerfile.WriteEnv("SHELL", "/bin/bash")
 		dockerfile.WriteEnv("GOPATH", "/var/cache/drone")
+		dockerfile.WriteRun("mkdir -p /root/.ssh")
 		dockerfile.WriteAdd("id_rsa", "/root/.ssh/id_rsa")
 		dockerfile.WriteRun("chmod 600 /root/.ssh/id_rsa")
 		dockerfile.WriteRun("echo 'StrictHostKeyChecking no' > /root/.ssh/config")
